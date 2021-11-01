@@ -20,10 +20,10 @@ source(system.file("raster_format/raster_format.codeR", package = "gdalio", must
 # get data with gdalio
 gdalio_set_default_grid(list(extent=c(-1,1,-1,1)*1.4e7,
                              projection='+proj=laea',
-                             dimension=c(x=220, y=220)))
+                             dimension=c(x=100, y=100)))
 
 topo <- gdalio_stars(topography::topography_source("aws"),
-                     resample='cubicspline')
+                     resample='Cubic')
 
 # remove No data
 topo[topo==0] <- NA
@@ -41,7 +41,7 @@ showtext_auto() # to allow text plotting
 
 # reate plot with ggplot2
 p <- ggplot(topo_points, aes(colour=values)) +
-  geom_sf(size=0.02) +
+  geom_sf(size=0.5) +
   scale_colour_gradientn(colours=scico(n=255, palette = 'vikO'),
                          breaks=c(round_nearest(topo, min),
                                   round_nearest(topo, max)),
@@ -53,7 +53,7 @@ p <- ggplot(topo_points, aes(colour=values)) +
         plot.title = element_text(hjust = 0.5),
         title = element_text(family='Poiret One', face='bold', size=45, colour='white'),
         legend.text = element_text(family='Poiret One', face='bold', size=35, colour='white')) #
-
+# p
 #save the plot
 ggsave(filename = 'exports/PointsWorldElevation_vikO.jpg', p)
 
