@@ -3,8 +3,8 @@
 
 # ---- import fonts ----------
 # Add fonts if needed
-# library(showtext)
-# font_add_google(name = "Amatic SC", family = "amatic-sc")
+library(showtext)
+font_add_google(name = "Poiret One", family = "Poiret One")
 
 #---- load libs ------
 library(stars)
@@ -20,7 +20,7 @@ source(system.file("raster_format/raster_format.codeR", package = "gdalio", must
 # get data with gdalio
 gdalio_set_default_grid(list(extent=c(-1,1,-1,1)*1.4e7,
                              projection='+proj=laea',
-                             dimension=c(x=180, y=180)))
+                             dimension=c(x=220, y=220)))
 
 topo <- gdalio_stars(topography::topography_source("aws"),
                      resample='cubicspline')
@@ -41,20 +41,19 @@ showtext_auto() # to allow text plotting
 
 # reate plot with ggplot2
 p <- ggplot(topo_points, aes(colour=values)) +
-  geom_sf(size=0.25) +
-  scale_colour_gradientn(colours=scico(n=255, palette = 'berlin'),
+  geom_sf(size=0.02) +
+  scale_colour_gradientn(colours=scico(n=255, palette = 'vikO'),
                          breaks=c(round_nearest(topo, min),
                                   round_nearest(topo, max)),
                          limits=c(round_nearest(topo, min),
                                   round_nearest(topo, max)))+
-  labs(colour='', title='elevation (m.s.l)') +
+  labs(colour='', title='Elevation (m.s.l)') +
   theme_void() +
   theme(legend.position = "bottom",
         plot.title = element_text(hjust = 0.5),
-        title = element_text(family='amatic-sc', face='bold', size=45, colour='white'),
-        legend.text = element_text(family='amatic-sc', face='bold', size=35, colour='white')) #
+        title = element_text(family='Poiret One', face='bold', size=45, colour='white'),
+        legend.text = element_text(family='Poiret One', face='bold', size=35, colour='white')) #
 
 #save the plot
-ggsave(filename = 'exports/PointsWorldElevation.jpg', p)
-
+ggsave(filename = 'exports/PointsWorldElevation_vikO.jpg', p)
 
