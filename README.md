@@ -5,3 +5,8 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day1 - Points:
 
 ![Global Elevation Points](/exports/PointsWorldElevation_vikO2.jpg)
+
+
+## Day2 - Lines:
+
+![Global Elevation Points](/exports/VolcanoContoursCROP.jpg)
