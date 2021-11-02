@@ -95,8 +95,13 @@ p3 <- contour_plot(-1.5226811151793127, 29.249456547735342,
                    .lin_col='#276D87', .tit_col='#9B242A')
 
 
+png('exports/VolcanoContoursPort.png', width=670, height=1800)
+p <- p1 / p2 / p3
+plot(p)
+dev.off()
 png('exports/VolcanoContours.png', height=670, width=1800)
 p <- p1 + p2 + p3
 plot(p)
 dev.off()
+
 
