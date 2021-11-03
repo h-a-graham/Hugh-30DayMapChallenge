@@ -15,7 +15,7 @@ font_add_google(name = "Major Mono Display", family = "Major Mono Display")
 
 gdalio_set_default_grid(list(extent=c(165.305211, 179.385818, -47.315717, -33.675928),
                              projection="+proj=longlat +datum=WGS84",
-                             dimension=c(x=100, y=100)))
+                             dimension=c(x=250, y=250)))
 
 topo_points <- gdalio_xyz(topography::topography_source("aws"),
                           resample='Cubic') %>%
@@ -27,7 +27,7 @@ topo_points <- gdalio_xyz(topography::topography_source("aws"),
   mutate(p_alpha = Band1/max(Band1),
          flippedZ= max(Band1) * (1 - (Band1/max(Band1)))) %>%
   arrange(desc(flippedZ)) %>%
-  st_buffer(., .$flippedZ*50)
+  st_buffer(., .$flippedZ*30)
 
 showtext_auto()
 
@@ -40,12 +40,12 @@ Kaka_c <- function(n=255){
 
 nz_plot <- function(.pal){
   ggplot(topo_points, aes(fill=Band1)) +
-    geom_sf(colour=alpha('grey90',0.1)) +
+    geom_sf(colour=alpha('grey90',0.1), alpha=0.6) +
     scale_fill_gradientn(colours=.pal,
-                         limits=c(0, 1930), breaks=c(0, 1900)) +
+                         limits=c(0, 2700), breaks=c(0, 2600)) +
     labs(fill='', size='', alpha='', title='New Zealand',
          subtitle = 'Elevation (m.s.l)',
-         caption ='#30DayMapChallenge')+
+         caption ='#30DayMapChallenge   @hughagraham')+
     theme_void() +
     theme(legend.position = c(0.8, 0.2),
           legend.direction="horizontal",
