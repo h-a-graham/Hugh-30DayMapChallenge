@@ -9,3 +9,7 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day2 - Lines:
 
 ![Global Elevation Points](/exports/VolcanoContoursCROP.png)
+
+## Day3 - Polygons:
+
+![Global Elevation Points](/exports/NZ_bufferedElevation.jpg)
