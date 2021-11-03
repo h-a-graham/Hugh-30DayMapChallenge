@@ -38,11 +38,11 @@ Kaka_c <- function(n=255){
   return(pal(n))
 }
 
-nz_plot <- function(.pal){
-  ggplot(topo_points, aes(fill=Band1)) +
+nz_plot <- function(df, .pal, minmax= c(0, 2700)){
+  ggplot(df, aes(fill=Band1)) +
     geom_sf(colour=alpha('grey90',0.1), alpha=0.6) +
     scale_fill_gradientn(colours=.pal,
-                         limits=c(0, 2700), breaks=c(0, 2600)) +
+                         limits=minmax, breaks=c(minmax[1], minmax[2]-100)) +
     labs(fill='', size='', alpha='', title='New Zealand',
          subtitle = 'Elevation (m.s.l)',
          caption ='#30DayMapChallenge   @hughagraham')+
@@ -56,8 +56,8 @@ nz_plot <- function(.pal){
           legend.text = element_text(family='Major Mono Display', face='bold', size=55, colour='white'),
           panel.background = element_rect(fill = 'black', colour = 'black'))
 }
-p <- nz_plot(scico(n=255, palette = 'tokyo'))
-p2 <- nz_plot(Kaka_c())
+p <- nz_plot(topo_points, scico(n=255, palette = 'tokyo'))
+p2 <- nz_plot(topo_points, Kaka_c())
 ggsave(filename = 'exports/NZ_bufferedElevation.jpg', p, dpi=600)
 ggsave(filename = 'exports/NZ_bufferedElevationKAKA.jpg', p2, dpi=600)
 
