@@ -116,7 +116,7 @@ toc()
 
 # THIS IS SLOW - YOU'VE BEEN WARNED!
 tic()
-animate_maps(rev(seq(0, 20, by=0.5)), out_path='exports/HexWorldAnimationT.mov',
+animate_maps(rev(seq(0, 359, by=1)), out_path='exports/HexWorldSpin.mov',
              ncores=parallel::detectCores())
 toc()
 
