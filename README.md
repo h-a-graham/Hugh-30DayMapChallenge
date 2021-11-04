@@ -13,8 +13,8 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day3 - Polygons:
 
 <p float="left">
-  <img src="/exports/NZ_bufferedElevationKAKA.jpg" width="500" />
-  <img src="/exports/NZ_bufferedElevation.jpg" width="500" /> 
+  <img src="/exports/NZ_bufferedElevationKAKA.jpg" width="350" />
+  <img src="/exports/NZ_bufferedElevation.jpg" width="350" /> 
 </p>
 
  
