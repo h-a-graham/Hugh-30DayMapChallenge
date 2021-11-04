@@ -13,8 +13,11 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day3 - Polygons:
 
                            |  
-:-------------------------:|:-------------------------:
-![NZ circles](/exports/NZ_bufferedElevationKAKA.jpg) |  ![NZ circles2](/exports/NZ_bufferedElevation.jpg)
+<p float="left">
+  <img src="/exports/NZ_bufferedElevationKAKA.jpg" width="100" />
+  <img src="/exports/NZ_bufferedElevation.jpg" width="100" /> 
+</p>
+
  
 
 ## Day4 - Hexagons:
