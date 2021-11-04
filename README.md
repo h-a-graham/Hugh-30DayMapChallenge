@@ -8,8 +8,12 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 
 ## Day2 - Lines:
 
-![Global Elevation Points](/exports/VolcanoContoursCROP.png)
+![Volcano Contours](/exports/VolcanoContoursCROP.png)
 
 ## Day3 - Polygons:
 
-![Global Elevation Points](/exports/NZ_bufferedElevationKAKA.jpg)
+![NZ circles](/exports/NZ_bufferedElevationKAKA.jpg)
+
+## Day4 - Hexagons:
+
+![World in Hex](/exports/HexWorldStill.jpg)
