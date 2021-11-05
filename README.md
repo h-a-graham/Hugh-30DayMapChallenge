@@ -22,3 +22,8 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day4 - Hexagons:
 
 ![World in Hex](/exports/HexWorldStill.jpg)
+
+
+## Day5 - Open Street Map
+
+![OSM welsh rivers](/exports/Day5-OSMRivers.jpg)

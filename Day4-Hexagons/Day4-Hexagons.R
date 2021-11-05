@@ -57,7 +57,7 @@ hexmap <- function(.proj='+proj=ortho', .dim=120, .lon=0, .offset=0.7,
     st_as_sf()
 
   # Join points and grid.
-  HEXjoin <- st_join(HEXgrid, hex_points,.predicate=st_nearest,  largest=T)%>%
+  HEXjoin <- st_join(HEXgrid, hex_points,join=st_nearest_feature,  largest=T)%>%
     filter(hex_array != '#000000')
 
   # Make the plot.
@@ -111,7 +111,7 @@ animate_maps <- function(long_list, .proj='+proj=ortho', .dim=120, .lon=0,
 
 
 tic()
-hexmap(out_path = 'exports/HexWorldStill.jpg')
+hexmap(out_path = 'exports/HexWorldStillT.jpg')
 toc()
 
 # THIS IS SLOW - YOU'VE BEEN WARNED!

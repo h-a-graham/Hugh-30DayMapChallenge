@@ -60,4 +60,3 @@ p <- nz_plot(topo_points, scico(n=255, palette = 'tokyo'))
 p2 <- nz_plot(topo_points, Kaka_c())
 ggsave(filename = 'exports/NZ_bufferedElevation.jpg', p, dpi=600)
 ggsave(filename = 'exports/NZ_bufferedElevationKAKA.jpg', p2, dpi=600)
-
