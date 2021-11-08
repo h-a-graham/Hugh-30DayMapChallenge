@@ -27,3 +27,8 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day5 - Open Street Map
 
 ![OSM welsh rivers](/exports/Day5-OSMRivers.jpg)
+
+
+## Days6:8 - Red, Green Blue
+
+![RGB](/exports/Day678-RGBp.png)
