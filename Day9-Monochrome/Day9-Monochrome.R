@@ -1,16 +1,19 @@
-#moochrome
+#moochrome - Dartmoor's Tors
 library(sf)
-library(dplyr)
 library(plyr)
+library(dplyr)
 library(rayshader)
 library(topography)
 library(raster)
+library(stars)
+library(rmapshaper)
 library(gdalio)
-library(tmap)
 library(showtext)
-library(rnaturalearth)
-library(cowplot)
-source(system.file("raster_format/raster_format.codeR", package = "gdalio", mustWork = TRUE))
+library(stringr)
+library(roughsf)
+
+source(system.file("raster_format/raster_format.codeR",
+                   package = "gdalio", mustWork = TRUE))
 
 #functions
 # set gdalio extent
@@ -39,9 +42,14 @@ dartmoorMask <- st_buffer(dartmoor, 100000) %>%
   st_difference(dartmoor) %>%
   st_as_sf()
 
+tors <- read_sf('data/opname_gpkg_gb/data/opname_gb.gpkg',
+                       query = "SELECT NAME1, LOCAL_TYPE, geom  FROM \'NamedPlace'\ WHERE LOCAL_TYPE == 'Hill Or Mountain'") %>%
+  filter(st_intersects(., dartmoor, sparse = FALSE)[,1]) %>%
+  filter(str_detect(NAME1, "Tor"))
+
 
 #get raster data and shade
-.res=10
+.res=100
 set_gdalio_sf(st_buffer(dartmoor, 5000), .res)
 
 ras <- gdalio_raster(dsn=topography::topography_source('aws'),
@@ -49,63 +57,63 @@ ras <- gdalio_raster(dsn=topography::topography_source('aws'),
 
 elmat <- raster_to_matrix(ras)
 
-
 texture <- elmat %>%
-  height_shade(texture=mono_pal()) %>%
-  add_shadow(ray_shade(elmat, maxsearch = 100, multicore = TRUE, zscale=.res*0.75),0.3) %>%
-    add_shadow(texture_shade(elmat, detail=0.5, contrast=2, brightness = 3),0.4)
+  ambient_shade(montereybay, sunbreaks = 24,maxsearch = 30, multicore=TRUE)
 
+# plot_map(texture)
 
 #convert texture to raster
 g <- gdalio_get_default_grid()
-tex_r <- raster::brick(scales::rescale(texture, to = c(0, 255)),
+
+rotatef = function(x) t(apply(x, 2, rev))
+newarrayt <- rotatef(texture)
+
+tex_r <- raster::raster(scales::rescale(newarrayt, to = c(0, 255)),
                        xmn = g$extent[1],
                        xmx = g$extent[2],
                        ymn = g$extent[3],
                        ymx = g$extent[4],
                        crs = g$projection)
 
-# Get fonts...
-font_add_google(name = "Megrim", family = "Megrim")
-showtext_auto()
+cuts<-10
+tex_cut <- cut(tex_r, cuts)
 
-main <- tm_shape(tex_r, raster.downsample = F)+
-  tm_rgb(legend.show = FALSE) +
-  tm_shape(dartmoorMask) +
-  tm_polygons(col='black', alpha=0.5) +
-  tm_scale_bar(breaks =c(0, 12),color.dark = "white", text.color = "white",
-               text.size = 1.5, lwd=2, just='left')+
-  tm_layout(
-            attr.position = c(0.005, 0.83),
-            title= 'Dartmoor',
-            title.position = c(0.01, 0.975),
-            title.color = 'white',
-            title.fontfamily = 'Megrim',
-            title.size = 7)
+# plot(tex_cut)
+# Convert raster to polygons...
+tex_s <- stars::st_as_stars(tex_cut)
 
-GB <- ne_countries(country = 'united kingdom', scale='large', returnclass='sf') %>%
-  st_transform(crs=st_crs(dartmoor))
+tex_sf <- st_as_sf(tex_s, merge=T) %>%
+  ms_simplify() %>%
+  st_cast(., "POLYGON")
 
-inset<- tm_shape(GB) +
-  tm_borders(col='white') +
-  tm_layout (frame = FALSE, bg.color = "transparent") +
-  tm_shape(st_bbox(tex_r) %>% st_as_sfc() %>% st_buffer(5000)) +
-  tm_fill(col='white', alpha=0.9)+
-  tm_shape(st_bbox(tex_r) %>% st_as_sfc()) +
-  tm_borders(col='black')
+tex_sf2 <- tex_sf %>%
+  mutate(fill = '#00000',
+         color = '#00000',
+         stroke = layer*0.01,
+         fillweight = scales::rescale(layer, c(0,1))*0.1+0.001,
+         fillstyle = 'hachure') %>%
+  st_cast(., "POLYGON") %>%
+  filter(st_intersects(., dartmoor, sparse = FALSE)[,1])
 
+tors_2 <- tors %>%
+  mutate(size=5,
+         color="#606060",
+         label_pos = "e")
 
-m <- tmap_grob(main)
-i <- tmap_grob(inset)
-
-
-im <- ggdraw() +
-  draw_plot(m) +
-  draw_plot(i,
-            width = 0.4, height = 0.4,
-            x = 0.58, y = 0.025)
-iml <-  add_sub(im, label="#30DayMapChallenge   @hughagraham   Made with Natural Earth")
-
-cowplot::save_plot('exports/Day9-Monochrome.jpg', im, base_width=6, base_height=6)
+tors_3 <- tors %>%
+  filter(NAME1 %in% c('Sharp Tor', 'Hanging Stone Tor', 'Belstone Tor',
+                      'Sheeps Tor', 'Flat Tor', 'Hound Tor',
+                      'Crockern Tor', 'Brent Tor', "Hunter's Tor")) %>%
+  mutate(size=8,
+         color="#606060",
+         label = NAME1,
+         label_pos = "e")
 
 
+p <- roughsf::roughsf(list(tex_sf2, tors_2, tors_3),
+                 title = "Dartmoor's Tors", caption = "#30DayMapChallenge   @hughagraham Contains OS data © Crown copyright and database right (2021)",
+                 title_font = "48px Megrim", font = "20px Megrim", caption_font = "15px Megrim",
+                 roughness = 1, bowing = 1, simplification = 1,
+                 width = 1000, height = 1000)
+
+save_roughsf(p, 'exports/Day9-MonochromeSKETCH.png')
