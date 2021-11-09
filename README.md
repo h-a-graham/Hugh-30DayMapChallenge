@@ -30,14 +30,14 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 
 
 ## Days6:8 - Red, Green Blue
-![Monochrome1](/exports/Day9-MonochromeSKETCH.png)
 
-![Monochrome2](/exports/Day678-RGBp.png)
+
+![RGB](/exports/Day678-RGBp.png)
 
 
 ## Day9 - Monochrome
-
-![Monochrome](/exports/Day9-MonochromeEDIT.jpg)
+![Monochrome1](/exports/Day9-MonochromeSKETCH.png)
+![Monochrome2](/exports/Day9-MonochromeEDIT.jpg)
 
 
 
