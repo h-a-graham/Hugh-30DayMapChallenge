@@ -8,7 +8,6 @@ library(raster)
 library(stars)
 library(rmapshaper)
 library(gdalio)
-library(showtext)
 library(stringr)
 library(roughsf)
 
@@ -91,7 +90,7 @@ tex_sf2 <- tex_sf %>%
          color = '#00000',
          stroke = layer*0.01,
          fillweight = scales::rescale(layer, c(0,1))*0.1+0.001,
-         fillstyle = 'hachure') %>%
+         fillstyle = sample(c("hachure", "solid", "zigzag", "cross-hatch"),1)) %>%
   st_cast(., "POLYGON") %>%
   filter(st_intersects(., dartmoor, sparse = FALSE)[,1])
 
@@ -101,7 +100,7 @@ tors_2 <- tors %>%
          label_pos = "e")
 
 tors_3 <- tors %>%
-  filter(NAME1 %in% c('Sharp Tor', 'Hanging Stone Tor', 'Belstone Tor',
+  filter(NAME1 %in% c('Hanging Stone Tor', 'Belstone Tor',
                       'Sheeps Tor', 'Flat Tor', 'Hound Tor',
                       'Crockern Tor', 'Brent Tor', "Hunter's Tor")) %>%
   mutate(size=8,
@@ -109,10 +108,9 @@ tors_3 <- tors %>%
          label = NAME1,
          label_pos = "e")
 
-
 p <- roughsf::roughsf(list(tex_sf2, tors_2, tors_3),
                  title = "Dartmoor's Tors", caption = "#30DayMapChallenge   @hughagraham Contains OS data © Crown copyright and database right (2021)",
-                 title_font = "48px Megrim", font = "20px Megrim", caption_font = "15px Megrim",
+                 title_font = "48px Megrim", font = "30px Megrim", caption_font = "15px Megrim",
                  roughness = 1, bowing = 1, simplification = 1,
                  width = 1000, height = 1000)
 
