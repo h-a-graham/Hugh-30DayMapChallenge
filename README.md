@@ -36,7 +36,7 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 
 ## Day9 - Monochrome
 
-![Monochrome](/exports/Day9-Monochrome.jpg)
+![Monochrome](/exports/Day9-MonochromeEDIT.jpg)
 
 
 
