@@ -40,6 +40,7 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ![Monochrome2](/exports/Day9-MonochromeEDIT.jpg)
 
 
-
+## Day10 - Raster
+![Raster](/exports/Day10-RasterEDIT.jpg)
 
 
