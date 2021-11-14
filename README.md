@@ -43,4 +43,6 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day10 - Raster
 ![Raster](/exports/Day10-RasterEDIT.jpg)
 
+## Day 11 - 3D
 
+![3D City od London](/exports/Day11-3DCityOfLondonEDIT.png)
