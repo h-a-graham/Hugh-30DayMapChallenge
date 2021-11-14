@@ -2,7 +2,7 @@ library(EAlidaR)
 library(rayshader)
 library(raster)
 library(viridisLite)
-library(purrr)
+library(furrr)
 
 # ---- Functions ----
 read_lidar <- function(.xy){
@@ -26,13 +26,14 @@ estuary_texture <- function(elmat, bias, n=256, direction=1){
 
 estuary_coords <- list(c(581181 , 169832), c(604234 , 217959), c(326660 , 374961))
 
+plan(multisession, workers = 3)
 # lidar_matrices <-readRDS('myCache/rasterList.rds')
-lidar_matrices <- map(estuary_coords, ~ read_lidar(.x))
+lidar_matrices <- future_map(estuary_coords, ~ read_lidar(.x))
 saveRDS(lidar_matrices, 'myCache/rasterList.rds')
 colour_bias <- c(10, 3, 2.5)
 direction <- c(1, -1, -1)
 
-textures <- pmap(list(lidar_matrices, colour_bias, direction),
+textures <- purrr::pmap(list(lidar_matrices, colour_bias, direction),
                  ~ estuary_texture(..1, bias=..2, direction = ..3))
 #indiviual maps
 # iwalk(textures, ~ save_png(.x, filename = sprintf('exports/EstuaryTestuary%s.png', .y)))
