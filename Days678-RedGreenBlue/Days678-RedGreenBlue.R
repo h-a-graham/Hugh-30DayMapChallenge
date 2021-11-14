@@ -3,6 +3,7 @@ library(rayshader)
 library(raster)
 library(viridisLite)
 library(furrr)
+library(purrr)
 
 # ---- Functions ----
 read_lidar <- function(.xy){
