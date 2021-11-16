@@ -46,3 +46,9 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day 11 - 3D
 
 ![3D City od London](/exports/Day11-3DCityOfLondonEDIT.png)
+
+
+## Day 16 - Rural/Urban
+
+![Rural Urban Kamchatka](/exports/Day16-UrbanRural.jpg)
+

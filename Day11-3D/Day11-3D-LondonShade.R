@@ -47,3 +47,6 @@ render_highquality(filename = 'exports/Day11-3DCityOfLondon.png',
                    # environment_light = 'data/syferfontein_1d_clear_4k.hdr', # download from: https://polyhaven.com/hdris/sunrise-sunset
                    cache_filename=cache_f,
                    samples =200)
+
+render_movie(filename = 'exports/CoL3Dmovie.mp4', type='oscillate')
+
