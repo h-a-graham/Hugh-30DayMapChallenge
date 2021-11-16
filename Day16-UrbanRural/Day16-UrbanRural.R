@@ -57,7 +57,7 @@ main <- tm_shape(tex_rast, raster.downsample = F)+
   tm_layout(
     title= 'Petropavlovsk-Kamchatsky',
     title.position = c(0.01, 0.96),
-    title.color = 'white',
+    title.color = '#E16121',
     title.fontfamily = 'Gugi',
     title.size = 20) +
   tm_credits("#30DayMapChallenge   @hughagraham   Made with: Natural Earth, SRTM", position=c("left", "bottom"),
