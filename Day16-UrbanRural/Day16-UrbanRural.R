@@ -60,7 +60,8 @@ main <- tm_shape(tex_rast, raster.downsample = F)+
     title.color = '#E16121',
     title.fontfamily = 'Gugi',
     title.size = 20) +
-  tm_credits("#30DayMapChallenge   @hughagraham   Made with: Natural Earth, SRTM", position=c("left", "bottom"),
+  tm_credits("#30DayMapChallenge   @hughagraham   Made with: Natural Earth, SRTM, © OpenStreetMap contributors",
+             position=c("left", "bottom"),
              size=120.0,  col = 'white',fontfamily = 'Gugi')
 # main
 
