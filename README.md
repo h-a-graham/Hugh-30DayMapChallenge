@@ -52,3 +52,7 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 
 ![Rural Urban Kamchatka](/exports/Day16-UrbanRural.jpg)
 
+## Day 17 - Land
+
+![Land Shade NZ](/exports/Day17-Land_NZ..png)
+

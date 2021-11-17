@@ -13,6 +13,7 @@ set_canvas_centroid(52.98730614503858, 158.58338737882468,
                     radius=70000)
 
 #download buildings
+
 region <-st_bbox(canvasExent()) %>%
   st_as_sfc() %>%
   st_set_crs(3857)
@@ -34,13 +35,13 @@ countires <- ne_coastline(scale='medium',returnclass='sf') %>%
 topo_mat <-raytrix::topo_matrix(res=50, src='srtm_gl1')
 
 #rayshade
-pal.cols <- scico(5, palette = 'lapaz')
+pal.cols <- scico(5, palette = 'romaO', direction = 1)
 
 ray_tex <- topo_mat %>%
-  sphere_shade(texture=create_texture( pal.cols[1], pal.cols[2], pal.cols[3],
-                                       pal.cols[4], pal.cols[5],)) %>%
+  sphere_shade(texture=create_texture(pal.cols[2], pal.cols[5], pal.cols[1],
+                                       pal.cols[4], pal.cols[3],)) %>%
   add_shadow(texture_shade(topo_mat, detail=0.6, contrast = 3, brightness = 6),0.2) %>%
-  add_shadow(ray_shade(topo_mat,sunangle = 85, sunaltitude = 35, zscale = 10, multicore = T),0.1) %>%
+  add_shadow(ray_shade(topo_mat,sunangle = 85, sunaltitude = 35, zscale = 5, multicore = T),0.01) %>%
   add_overlay(generate_waterline_overlay(topo_mat, min = 0.0002, max = 0.1, smooth=2))
 
 # plot_map(ray_tex)
@@ -83,5 +84,5 @@ im <- ggdraw() +
             width = 0.4, height = 0.4,
             x = 0.58, y = 0.025)
 
-cowplot::save_plot('exports/Day16-UrbanRural.jpg', im, base_width=10, base_height=10)
+cowplot::save_plot('exports/Day16-UrbanRuralRomaOREV.jpg', im, base_width=10, base_height=10)
 
