@@ -56,3 +56,6 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 
 ![Land Shade NZ](/exports/Day17-Land_NZ..png)
 
+## Day 18 - Water
+
+![Water Shade EU](exports/Day18-Water_EU.png)
