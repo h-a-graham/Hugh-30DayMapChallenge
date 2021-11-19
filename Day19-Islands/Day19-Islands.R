@@ -1,4 +1,4 @@
-#moochrome - Dartmoor's Tors
+#Islands - Corse
 library(sf)
 library(raytrix)
 library(rayshader)
@@ -51,8 +51,8 @@ ext_box <- st_bbox(canvasExent()) %>%
 inset<- tm_shape(countires) +
   tm_lines(col='white', alpha=0.3) +
   tm_layout (frame = FALSE, bg.color = "transparent") +
-  tm_shape(st_buffer(ext_box, 1e5, joinStyle='MITRE')) +
-  tm_borders(col='white', alpha=0.8, lwd=3)
+  tm_shape(st_buffer(ext_box, 1e5, joinStyle='BEVEL')) +
+  tm_borders(col='white', alpha=0.8, lwd=2)
 
 
 #make grobs
@@ -64,7 +64,6 @@ im <- ggdraw() +
   draw_plot(m) +
   draw_plot(i,
             width = 0.2, height = 0.2,
-            x = 0.28, y = 0.55)
+            x = 0.28, y = 0.72)
 
-cowplot::save_plot('exports/Day19-Islands.jpg', im, base_height=30,
-                   base_width=30/((dim(tex_rast)[1]/(dim(tex_rast)[2]))))
+cowplot::save_plot('exports/Day19-Islands.png', im, base_height = 10, base_asp=1)
