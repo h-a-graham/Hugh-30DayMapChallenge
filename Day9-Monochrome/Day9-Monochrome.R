@@ -57,7 +57,7 @@ ras <- gdalio_raster(dsn=topography::topography_source('aws'),
 elmat <- raster_to_matrix(ras)
 
 texture <- elmat %>%
-  ambient_shade(montereybay, sunbreaks = 24,maxsearch = 30, multicore=TRUE)
+  ambient_shade(sunbreaks = 24,maxsearch = 30, multicore=TRUE)
 
 # plot_map(texture)
 

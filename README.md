@@ -59,3 +59,8 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 ## Day 18 - Water
 
 ![Water Shade EU](exports/Day18-Water_EU.png)
+
+
+## Day 19 - Islands
+
+![Corse](exports/Day19-Islands.jpg)
