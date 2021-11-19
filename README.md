@@ -63,4 +63,4 @@ Some 30 Day Map challange maps. Let's see how we get on. I'm hoping to make sure
 
 ## Day 19 - Islands
 
-![Corse](exports/Day19-Islands.jpg)
+![Corse](exports/Day19-Islands.png)
